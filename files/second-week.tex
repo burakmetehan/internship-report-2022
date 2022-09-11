@@ -1,0 +1,42 @@
+\section{Second Week: Introduction to Web Development}
+
+The first week of my internship was about the Java Core whereas we focused on enterprise version of Java, Java EE or Jakarta EE, and web development in the second week.
+
+\subsection{Introduction to Java EE Platform}
+
+After we learnt what versions of Java and what their main concern, we discussed enterprise level applications and their needs. Then, we focused on how Java values to developers, vendors and business.
+
+I learnt that, in Java world, the specifications are determined and defined concurringly and vendor only compete in implementations level so that developers can use any J2EE implementation for development and deployment. Additionally, I learnt layers that are the foundation of software architecture (presentation, application/business, data and service layers) and types of software architectures (one-tier, two-tier, three-tier and N-tier architectures) and their advantages and disadvantages.
+
+\subsection{Introduction to Web Development on Java Platform}
+
+After learning what web sites and web applications are and what their differences are, we discussed web servers and installing one of the preffered web servers on Java World: ``Tomcat''. I learnt what Tomcat is and how to configure it. After installation process, we focused on basics of web world: HTTP and WWW, Request and Response, URL, Domain Names, DNS, and Static and Dynamic Content.
+
+After these basics, I learned the ``Servlets'' which are the basic concept and tool for Web development on Java world and JSP which enables mixing static HTML content with special code that produces the dynamic content. Then, we talked about Model-1/Model-2, MVC and Servlet Container.
+
+\subsection{Developing Java Web Applications}
+
+I learned the basic anatomy of a web application and web module structure. I believe these topics are quite beneficial because knowing structure of web module is quite important in developing and deployment process for portability. Also, if structure of a web module is not suitable for general convention, it is hard to maintain the module.
+
+After that we dived into HTTP, which is quite important protocol on world of web since lots of things shape based on it. Especially, I surprised when I learnt greatness of the contents that are carried by a request and response. Request and repponse include a lot of headers and their fields.
+
+After HTTP, we focused on Servlets. I can tell that Servlets are huge part of Java web development in its first days. We learnt what they do, what their life cycle is, what their methods do. Then we discussed the ``\textit{Threading Issues}'', basically caused by the multi-threaded approach.
+
+Multi-Threaded Approach is an approach to solve the problem how one servlet object serves many clients. In this approach, basically, instead of creating multiple objects, the servlet container creates a separate thread for each invocation of \texttt{service()} method and that thread runs all methods of the servlet. It can be told that multithreaded approach makes servlets much faster. Also, we discussed the possible problem and solution of this approach.
+
+We also talked about techniques information sharing among servlets (ServletContext object, HttpSession object, Request attributes). Even though these techniques exists, general approach is using other information sharing techniques.
+
+\subsection{More on Java Web Applications}
+
+I learnt what developer should do for an exception and error management by configuring web descriptor, namely \texttt{web.xml}. In this week, we generally had used xml files for configurations; however, following weeks we used annotation based configurations.  Then we discussed the HTML forms, which are the basic data sender structure in HTML, and how they are used in web development and why they are important. I learnt that forms are simple and reliable user interface control tools and how the data collected by forms is sent to server side. We also talked about \texttt{GET} and \texttt{POST} methods.
+
+In session management, we learnt session tracking some techniques in details. Some of them are
+\begin{itemize}
+  \item Via IP address
+  \item User authentication
+  \item Hidden form fields
+  \item URL rewriting
+  \item Cookies
+\end{itemize}
+
+In filters part, we learnt how they are useful and how they can be used for security purposes. I learnt how a filter is designed and how a web application is configured to make use of filters.
