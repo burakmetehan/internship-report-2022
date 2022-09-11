@@ -1,2 +1,14 @@
+# VS Code Workspace
 *workspace
-*.gz
+
+# Latex Intermediate Files
+*.aux
+*.fdb*
+*.fls
+*.log
+*.out
+*.synctex*
+*.toc
+
+# Minted Folder
+_minted*
