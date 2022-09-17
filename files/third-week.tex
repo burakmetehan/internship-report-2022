@@ -1,0 +1,74 @@
+\section{Third Week: Spring Framework}
+
+After learning Java and basics of web development, I was amused. In the web development, our next step was a framework. In the internship program, Spring, \href{https://spring.io/why-spring}{the world's most popular Java framework}, is chosen for that purpose. Spring is an open-source framework developed for Java. Generally, it is used for developing web apps with Java Enterprise platform.
+
+\subsection{Environment Setup}
+
+Firstly, we prepared the environment by installating of Apache Tomcat -Java servlet container- and Maven -software project management and comprehension tool. 
+
+Since we will have been used the maven, our mentor talked about Maven. We discussed what Maven is and how we can use it. Then, we continued with brief introduction about Spring by mentioning what it is and why we use it.
+
+This week was mainly about Spring framework. I learnt a lot of information about Spring in this week. For the easiness of read, I will dive into the subsections and briefly explain what I learnt in this week and what they are.
+
+\subsection{Spring Framework}
+
+\subsubsection{Introduction to Spring}
+
+% Dividing into the Spring
+By using Spring initializr, we created out first spring project. While creating project, our mentor addressed the features of Spring initilizr and the dependicies part of it. After we opened the project, out mentor firstly focused the dependicies and their managements. While talking about the dependicies, we came up a problem with versions; therefore, our mentor talked about the general versioning methods. When we run the app for the first time, some members of team encountered a problem with the port of application; hence, our mentor needed to show us how we can change the settings of the projects by using the application.yaml file of the project.
+
+\subsubsection{Controllers}
+
+% Controllers 
+We started with the controllers. Controllers are the part of the The Spring Web model-view-controller (MVC) framework and they basically meet the requests. By using of the mapping annotations, requests are mapped to related functions inside controller class. The functions usually return a response after necessary processes are done according to the request. In our projects, we usually used ``ResponseEntity'' classes because we returned an entity.
+
+\subsubsection{Filter and Interceptor}
+
+% Filter and Interceptor
+We continued with the filters. The filters are objects used to intercept the HTTP requests and responses of the application. Basically, they are the layer before sending the request to the controller and before sending a response to the client. Some of the their common usages are the logging requests and response, logging request processing time, formatting of request body or header, verifying authentication tokens, or compressing response.
+
+Interceptors are pretty similar to filters but they act in Spring Context so are powerful to manage HTTP Request and Response but they can implement more sophisticated behaviour because can access all Spring context. In other words, we can not use filter out of web context while Spring interceptors can be used anywhere because it is defined in application context.
+
+\subsubsection{Exception}
+
+% Exception
+Then we dived into the exceptions. Firstly, we examined the default answer of spring for errors. An example from my final project is given below. 
+\begin{minted}[breaklines]{json}
+{
+  "timestamp": "2022-09-17T10:03:08.250+00:00",
+  "status": 500,
+  "error": "Internal Server Error",
+  "trace": "tr.com.obss.jip.springfinal.exception.UserNotFoundException: User, whose id number is 99, is not found! ...",
+  "message": "User, whose id number is 99, is not found!",
+  "path": "/users/99"
+}
+\end{minted}
+
+It can be told that this type of answers constitutes security vulnerability because of the information the error provide in error message and codes. For example, someone can tell that this system use Spring framework. After examined the default answer of Spring, we realized that errors are also needed to be handled due to security as well as providing the meaningful message. We discussed how we can handle errors and change the behaviours and messages when an error occur.
+
+\subsubsection{Model, Entity and Database}
+
+% Model
+After the error handling, we learnt the Data Tranfer Objects (DTOs) which is an object that is used to encapsulate data and carries this data between processes and their usages. In the final project, I extensively used models to transfer data between processes and layers.
+
+% Entity and Database
+Since we will have been used the database, we had to make the database connection. Spring provides database connection capability with hibernate which is integrated inside Spring and makes the database connection and necessary database operation. 
+
+Hibernate can also create the tables in database by using the entities that is provided by entity classes. Therefore, we used entity classes to tell the hibernate to create the table in database.
+
+\subsubsection{Services, Repositories and Configuration}
+
+% Services and Repositories
+Services are generally used for the business logic such as creating, storing or changing data. I extensively used the services in my final project. After the request was met by the controller, the proper function is called in the controller and the necessary business was done in the project.
+
+Repositories are the mechanism for encapsulating storage, retrieval, and search behavior which emulates a collection of objects. They are used for access layer used for accessing and making necessary operation in database. We chose to use Spring Data JPA for this purpose. After making necessary settings from application.yaml, Spring automatically connects itself to database and get ready to execute queries with little effort. In repositories, there is almost no need to write SQL queries executed in database even if it is allowed for us. By using the specific combination of some keys in the function names inside the repository interface, we provide necessary information to Spring so that Spring can create the proper queries and execute them by connecting database.
+
+% Various Configuration
+
+After the basics, we dived into the configuration of our app such as security, password encryption or data loading when it is started.
+
+\subsection{Final Project and React}
+
+After the information transfer about Spring was done, we were assigned to start to develop the backend part of our final project. We were provided brief explanation and requirements. Furthermore, in the last day of the third week, we started to learn React for front-end development.
+
+Since we continued the learning react and developing the final project mostly in fourth week, I will explain the react and final project in the next section of the report.
