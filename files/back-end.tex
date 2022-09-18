@@ -1,0 +1,275 @@
+\subsection{Back-end}
+
+As mentioned the requirements, I used Spring for back-end. The main folder structure can be seen at the appendicies \hyperref[back-end-tree]{back-end-tree}. Spring Security is active and JWT tokens, which are needed to be inside header of request, are used for authentication. After security is passed, request is handled by controllers.
+
+In the back-end part, there are 9 folders:
+\begin{itemize}
+  \item \texttt{config}: contains the configurations and data loader.
+  \item \texttt{controller}: contains request (Rest) controllers. If the requests are authorized, they are met by the related controller. When a request is met necessary business logic is run.
+  \item \texttt{entity}: contains entity classes. These entity classes are used in table of database.
+  \item \texttt{exception}: contains the user-defined exceptions and global exception handler.
+  \item \texttt{filter}: contains filter classes. All requests go throgh the filters.
+  \item \texttt{model}: contains model classes. These classes are used for data transfer between client, server and database sides.
+  \item \texttt{repo}: contains repositories. These interfaces are used in order to access database by using Spring JPA.
+  \item \texttt{service}: contains services. These classes consist of the business layer functions.
+  \item \texttt{util}: contains utilities.
+\end{itemize}
+These are the main folders which consist of several files. Firstly, I will explain them in detail and provide Postman screenshots to show example requests. Later, I will talk about general workflow.
+
+
+\subsubsection{\texttt{config}}
+
+The classes inside this folder are used for configuration of Spring and data loading when Spring run the app. After app starts running, data loader is not used although configurations influence the answer of the app.
+
+\begin{figure}[ht]
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [config
+      [AuthEntryPoint.java, file]
+      [DataLoader.java, file]
+      [PasswordConfig.java, file]
+      [WebSecurityConfig.java, file]
+    ]
+  \end{forest}
+  \caption{Structure of config folder.}
+\end{figure}
+
+\paragraph{\texttt{AuthEntryPoint.java:}} When authorization is failed in Spring Security, the function inside this class is called and returns a repsonse with the \texttt{UNAUTHORIZED} status code.
+
+\paragraph{\texttt{PasswordConfig:}} This class indicates the password encoder which is used throgh the app.
+
+\paragraph{\texttt{WebSecurityConfig:}} It is configuration of Spring Web Security. Spring Web Security check all the requests for authorization and roles. Also, if an exception occurs, it handles the exception by the help of global exception handler. 
+
+Web Security of Spring is a little bit confusing and not easy to handle. Especially, JWT token based authentication challanged me. I spent almost one day to understand what JWT token and JWT token based authentication. By reading documents and examining examples, I managed to implement JWT token based authentication to my security.
+
+\paragraph{\texttt{DataLoader:}} This class is run when the application is run. It checks the database for default admin user, and roles, called ``ROLE\_ADMIN'' and ``ROLE\_USER''. If there is a missing in database, it creates admin user and roles. After learning the `\texttt{ApplicationRunner}' interface, it was easy to implement.
+
+
+\subsubsection{\texttt{controller}}
+
+Controllers are the basic elements of the back-end development. Controller files are used with \texttt{@RestController} annotation which indicates that the class is Rest API controller. Each class has \texttt{@RequestMapping} annotation that shows the path of the controller; that is, the requests coming to the specified path are handled by that class.
+
+The classes include several mappings for different request types such as \texttt{GET}, \texttt{POST}, \texttt{PUT}, or \texttt{DELETE}. When a request is sent to back-end Spring send it to suitable controller according to \texttt{@RequestMapping}. When a request is arrived the class, it handles it according to its type.
+
+Since controllers are not difficult, I was able to code and map the requests easily. The most problematic part of the controllers was authentication of functions. Since some operations, such as deleting users or books, cannot be done by normal users but admins, I needed to secure the related functions. After researching, I managed to block the normal user using some operations by using \texttt{@Secured} annotation. This annotation takes a string which is the privileged role, in my case \texttt{ROLE\_ADMIN}. When this annotation is used, Spring Security check for the additional role.
+
+\begin{figure}[ht]
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [controller
+      [AuthController.java, file]
+      [BookController.java, file]
+      [BookListController.java, file]
+      [UserController.java, file]
+    ]
+  \end{forest}
+  \caption{Structure of controller folder.}
+\end{figure}
+
+\paragraph{\texttt{AuthController.java:}} This class handles the requests coming to path ``\texttt{/auth}'' and has two ``\texttt{POST}'' mapping.
+
+This class is responsible for authentication operations. It can be used for checking the validation of the JTWT token or logging in. By using the information inside request body, I checked the necessary information and send the response to client. The responses include some required information for front-end such as validation information, admin status, or JWT token.
+
+\paragraph{\texttt{BookController.java:}} This class handles the requests coming to path \texttt{/books}. It has six \texttt{GET}, one \texttt{POST}, one \texttt{PUT}, and one \texttt{DELETE} mapping. 
+
+This class is responsible for book operations such as searching, adding, updating or deleting. In this class, I need a special concern: Pageable and List data. Since I need both pageable and list data in front-end while searching book, I coded two variances of each searching functions. This class can handle both id, or name searches. In name searches, there is no need to provide full name of the book. Instead, it is enough to provide a letter or word inside the book name.
+
+\paragraph{\texttt{BookListController.java:}} This class handles the requests coming to path \texttt{/} and has two \texttt{PUT}. Although the main path is \texttt{/}, the two functions inside this class have special path mapping for its \texttt{PUT} mapping.
+
+This class is responsible for the favorite and read list operations. 
+
+According to traditional way, updating something is done with \texttt{PUT} request. Since adding or removing a book from read or favorite lists are updating the list, I decided to use \texttt{PUT} requests. However, there were four operations: adding or removing from read list and adding or removing from favorite list. Firstly, I divide all operations to four functions ad realized that it was not a good idea because path mapping was not nice. 
+
+So, a problem came up about how to handle these operations. I decided to have two main function and paths for read and favorite lists. In main paths \texttt{/read} and \texttt{/fav}, I handled read and favorite list operations, respectively. To acquire the necessary information to add or remove book from list a request parameter is needed to be sent as well as the book and user ids to do operation.
+
+\paragraph{\texttt{UserController.java:}} This class handles the requests coming to path \texttt{/users}. It has six \texttt{GET}, one \texttt{POST}, one \texttt{PUT}, and one \texttt{DELETE} mapping.
+
+This class is pretty similar to book controller and responsible for user operations such as searching, adding, updating or deleting. Like in book controller, I also need a special concern, Pageable and List data, and I solve this problem same way in book controller.
+
+
+\subsubsection{\texttt{entity}}
+
+Entities were my main data classes. Thanks to Hibernate, I was also able to create the database tables by using \texttt{@Table} annotations, so the tables were created automatically. Around the back-end such as between data and business layers, I used these entity classes; however, I used models while sharing and transmitting information between client and server side.
+
+The main problem about entity classes was the mutual data types. A \texttt{User} includes \texttt{Set<Book>} inside it, and A \texttt{Book} includes \texttt{Set<User>} inside it. This was problem when this information is sent to client side due to this mutuality. For example, a \texttt{User} is tried to send to client, its read list is also sent; however, inside read list, there are books which contains the \texttt{User} that is being sent to client. Therefore, there was a infinite loop while parsing the data. I solved it by using \texttt{@ManyToMany}, and \texttt{@JsonManagedReference} annotations.
+
+\begin{figure}[ht]
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [entity
+      [Book.java, file]
+      [EntityBase.java, file]
+      [Role.java, file]
+      [User.java, file]
+    ]
+  \end{forest}
+  \caption{Structure of entity folder.}
+\end{figure}
+
+\paragraph{\texttt{Book.java:}} This is an entity class that extends \texttt{EntityBase} for a \texttt{Book} and is responsible for holding information of a book. It has `name', `author', `page count', `type', `publisher', and `publication date' fields as well as the data fields in \texttt{EntityBase}. Also, it has many-to-many relations with \texttt{User} class. 
+
+\paragraph{\texttt{User.java:}} This is an entity class that extends \texttt{EntityBase} for a \texttt{User} and is responsible for holding information of an user. It has `username', `password', `read list', `favorite list', and `roles' fields as well as the data fields in \texttt{EntityBase}. Also, it has many-to-many relations with \texttt{Book} and \texttt{Role} classes. 
+
+\paragraph{\texttt{Role.java:}} This is an entity class that extends \texttt{EntityBase} for a \texttt{User} and is responsible for holding information of a role. It has `name' field as well as the data fields in \texttt{EntityBase}. Also, it has many-to-many relations with \texttt{User} class. 
+
+\paragraph{\texttt{EntityBase.java:}} This is an entity class which is the base of other entities. This holds the general information such as `id', `creation date', `udpate date' or `activity'.
+
+
+\subsubsection{\texttt{exception}}
+
+Exceptions are used several points to provide information to exception handler. Exception handler catches the exceptions and send a response to client. Main purpose of the exception handler is security because default Spring error exploit some system information. Therefore, I used special exceptions and exception handler to provide necessary but not important information to outside.
+
+Creating new exception classes was not hard. However, adjusting the exception handler is a little though because the order of the functions can be problem. I solved this problem by using \texttt{@Order} annotations and with attention.
+
+\begin{figure}[ht]
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [exception
+      [BadRequestException.java, file]
+      [BookListException.java, file]
+      [BookNotFoundException.java, file]
+      [ConflictException.java, file]
+      [GlobalExceptionHandler.java, file]
+      [RoleNotFoundException.java, file]
+      [UserNotFoundException.java, file]
+    ]
+  \end{forest}
+  \caption{Structure of exception folder.}
+\end{figure}
+
+Names of the files explain what the classes are for and what they do. These are used for specified the exceptions in related positions.
+
+
+\subsubsection{\texttt{filter}}
+
+My app contains only one filter. This filter for the checking the JWT token. When user or admin is logged in to system, I sent a new JWT token. The reason for that is transmitting username and password in all request. Instead, I use JWT token for the authentication. All requests go through the filter for JWT token check. If the JWT token does not exist in the header or it is expired, \texttt{BadRequestException} is thrown and response is returned with \texttt{BAD\_REQUEST} status code.
+
+This part challanged me a lot because I did not know JWT and how to check it. For this filter and the JWT authorization, I spent almost 1 day. However, the main problem was not that the subject was difficult, but that I misunderstood some concepts and topics and needed to change the security configuration quite a bit. By getting help from internet and a lot of reading, I managed to solve the problem in security configuration and filter.
+
+\begin{figure}[ht]
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [filter
+      [JwtRequestFilter.java, file]
+    ]
+  \end{forest}
+  \caption{Structure of filter folder.}
+\end{figure}
+
+
+\subsubsection{\texttt{model}}
+
+Models are mainly used to transmitting data between client and server sides. There were two reasons. The first one is that client do not know the some information, such as creation date. The second one is that client should not and no need know some information such as password of user or update date of the object. Therefore, I used DTOs almost for any type of information transfer between client and server sides.
+
+Addition to DTOs, there is a one class, called \texttt{MyUserDetails}, that is not used for information transfer. It was needed for the authentication system. It helps by indicating the how the necessary information is extracted from my \texttt{User} entity.
+
+\begin{figure}[ht]
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [model
+      [AuthDTO.java, file]
+      [AuthResponseDTO.java, file]
+      [BookDTO.java, file]
+      [BookResponseDTO.java, file]
+      [BookUpdateDTO.java, file]
+      [JwtRequest.java, file]
+      [JwtResponse.java, file]
+      [MyUserDetails.java, file]
+      [RoleResponseDTO.java, file]
+      [UserDTO.java, file]
+      [UserResponseDTO.java, file]
+      [UserUpdateDTO.java, file]
+    ]
+  \end{forest}
+  \caption{Structure of model folder.}
+\end{figure}
+
+
+\subsubsection{\texttt{repo}}
+
+Repositories are used to access the databases and they make use of the Spring JPA by extending \texttt{JpaRepository}. Some basic operation such as directly adding or finding by id is inside the \texttt{JpaRepository} but if I want to add something speciali I basically write the function name by using keywords, such as \texttt{findBy}, or \texttt{All}, and Spring generates the necessary queries in the background. This is so easy to use and increase the speed of developing.
+
+\begin{figure}[ht]
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [repo
+      [BookRepository.java, file]
+      [RoleRepository.java, file]
+      [UserRepository.java, file]
+    ]
+  \end{forest}
+  \caption{Structure of repo folder.}
+\end{figure}
+
+There is one for each main entity. \texttt{BookRepository} is used for operations on books, \texttt{UserRepository} is used for operations on users, and \texttt{RoleRepository} is used for operations on roles.
+
+
+\subsubsection{\texttt{service}}
+
+Services are the business layer of my app. All the operations, such as adding/removing books or users, and logics are done in this layer. Controllers use the services for related operations; therefore, it can be told that there is a one service for each controller.
+
+Inside services, other services or necessary repositories are used. Accessing database is done inside services by the help of repositories. Repositories contains several different implementation of same operation for different needs. For example, there are several searching functions for both pageable and list data.
+
+\begin{figure}[ht]
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [service
+      [BookListService.java, file]
+      [BookService.java, file]
+      [JwtUserDetailsService.java, file]
+      [UserService.java, file]
+    ]
+  \end{forest}
+  \caption{Structure of service folder.}
+\end{figure}
+
+
+\subsubsection{\texttt{util}}
+
+This folder contains only one class, called \texttt{JwtTokenUtil}. This class contains several functions that can be applicable on JWT token such as getting username or expiration date from token. Also, it can generate new JWT token. JWT filter and \texttt{AuthController} excessively used this class.
+
+\begin{figure}[ht]
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [util
+      [JwtTokenUtil.java, file]
+    ]
+  \end{forest}
+  \caption{Structure of controller folder.}
+\end{figure}
