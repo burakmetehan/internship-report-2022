@@ -1,47 +1,26 @@
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{blindtext}
+\usepackage{bold-extra}
+\usepackage{caption}
+\usepackage{copyrightbox}
+\usepackage{dirtree}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage[edges]{forest}
 \usepackage{geometry}
 \usepackage{graphicx}
-\usepackage{url} 
-\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={<pdf title here>}, pdfauthor={<author's name here>}, pdfsubject={<subject here>}, pdfkeywords={<keywords here>}]{hyperref} 
-
-% \usepackage{amsmath}
-% \usepackage{amsfonts}
-% \usepackage{amsthm}
-% \usepackage{amssymb}
-
-% \usepackage{hyperref}
-\usepackage{enumitem}
-% \usepackage{float}
-% \usepackage{pdfpages}
-
-% \usepackage{alltt}
-% \usepackage{xparse}
-
-\usepackage[newfloat]{minted}
-% \usepackage{booktabs}
-% \usepackage{color, colortbl}
-
-\usepackage{blindtext}
-
+\usepackage{hyperref}
 \usepackage{indentfirst}
+\usepackage[newfloat]{minted}
+% \usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={<pdf title here>}, pdfauthor={<author's name here>}, pdfsubject={<subject here>}, pdfkeywords={<keywords here>}]{hyperref} 
 \usepackage{setspace}
-
-\usepackage{copyrightbox}
 \usepackage{url}
-
 \usepackage{wrapfig}
-% \definecolor{ex}{rgb}{1.00,0.65,0.00}
-% \definecolor{bg}{rgb}{0.95,0.95,0.95}
-% \setminted
-% {
-% 	mathescape=true,
-% 	xleftmargin=\parindent,
-% 	bgcolor=bg,
-% 	escapeinside=@@
-% }
-
-% \SetupFloatingEnvironment{listing}{name=Code}
 
 \geometry{
   a4paper
@@ -56,6 +35,51 @@
   } \\
   \vspace{8pt}
 }
+
+%%%%% Directory Tree Settings %%%%%
+\definecolor{folderbg}{RGB}{124,166,198}
+\definecolor{folderborder}{RGB}{110,144,169}
+
+\newlength\Size
+\setlength\Size{4pt}
+
+\tikzset{%
+  folder/.pic={%
+    \filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);
+    \filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+  },
+  file/.pic={%
+    \filldraw [draw=folderborder, top color=folderbg!5, bottom color=folderbg!10] (-\Size,.4*\Size+5pt) coordinate (a) |- (\Size,-1.2*\Size) coordinate (b) -- ++(0,1.6*\Size) coordinate (c) -- ++(-5pt,5pt) coordinate (d) -- cycle (d) |- (c) ;
+  },
+}
+
+\forestset{%
+  declare autowrapped toks={pic me}{},
+  pic dir tree/.style={%
+    for tree={%
+      folder,
+      font=\ttfamily,
+      grow'=0,
+    },
+    before typesetting nodes={%
+      for tree={%
+        edge label+/.option={pic me},
+      },
+    },
+  },
+  pic me set/.code n args=2{%
+    \forestset{%
+      #1/.style={%
+        inner xsep=2\Size,
+        pic me={pic {#2}},
+      }
+    }
+  },
+  pic me set={directory}{folder},
+  pic me set={file}{file},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
@@ -72,16 +96,20 @@
 \input{files/company.tex}
 \input{files/orientation.tex}
 
-% First Week
+% Core Java
 \input{files/core-java.tex}
 
-% Second Week
+% Web Development
 \input{files/web-development.tex}
 
-% Third Week
+% Spring Framework
 \input{files/spring-framework.tex}
 
-% Fourth Week
+% React
 \input{files/react.tex}
+
+\newpage
+% Final Project
+\input{files/final-project.tex}
 
 \end{document}
