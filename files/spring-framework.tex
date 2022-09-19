@@ -1,19 +1,19 @@
-\section{Spring Framework}
+\section{\texttt{Spring} Framework}
 
-After learning Java and the basics of web development, I was amused. In web development, our next step was a framework. In the internship program, Spring, \href{https://spring.io/why-spring}{the world's most popular Java framework}, is chosen for that purpose. Spring is an open-source framework developed for Java. Generally, it is used for developing web apps with the Java Enterprise platform.
+After learning \texttt{Java} and the basics of web development, I was amused. In web development, our next step was a framework. In the internship program, \texttt{Spring}, \href{https://spring.io/why-spring}{the world's most popular \texttt{Java} framework}, is chosen for that purpose. \texttt{Spring} is an open-source framework developed for \texttt{Java}. Generally, it is used for developing web apps with the \texttt{Java} Enterprise platform.
 
 \subsection{Environment Setup}
 
-Firstly, we prepared the environment by installing Apache Tomcat -Java servlet container- and Maven -software project management and comprehension tool. 
+Firstly, we prepared the environment by installing Apache Tomcat -\texttt{Java} servlet container- and Maven -software project management and comprehension tool. 
 
-Since we will have been using the Maven, our mentor talked about Maven. We discussed what Maven is and how we can use it. Then, we briefly introduced Spring by mentioning what it is and why we use it.
+Since we will have been using the Maven, our mentor talked about \texttt{Maven}. We discussed what Maven is and how we can use it. Then, we briefly introduced \texttt{Spring} by mentioning what it is and why we use it.
 
-This week was mainly about the Spring framework. I learned a lot of information about Spring this week. For ease of reading, I will dive into the subsections and briefly explain what I learned this week and what they are.
+This week was mainly about the \texttt{Spring} framework. I learned a lot of information about \texttt{Spring} this week. For ease of reading, I will dive into the subsections and briefly explain what I learned this week and what they are.
 
-\subsection{Introduction to Spring}
+\subsection{Introduction to \texttt{Spring}}
 
 % Dividing into the Spring
-By using Spring initializr, we created our first spring project. While creating a project, our mentor addressed the features of Spring initilizr and the dependencies part of it. After we opened the project, our mentor firstly focused on the dependencies and their management. While discussing the dependencies, we found a problem with versions; therefore, our mentor talked about the general versioning methods. When we ran the app for the first time, some team members encountered a problem with the port of the application; hence, our mentor needed to show us how we could change the settings of the projects by using the application.yaml file of the project, configuration file of the Spring.
+By using \texttt{Spring initializr}, we created our first spring project. While creating a project, our mentor addressed the features of \texttt{Spring initilizr} and the dependencies part of it. After we opened the project, our mentor firstly focused on the dependencies and their management. While discussing the dependencies, we found a problem with versions; therefore, our mentor talked about the general versioning methods. When we ran the app for the first time, some team members encountered a problem with the port of the application; hence, our mentor needed to show us how we could change the settings of the projects by using the application.yaml file of the project, configuration file of the \texttt{Spring}.
 
 \subsubsection{Controllers}
 
@@ -25,12 +25,12 @@ We started with the controllers. Controllers are part of the Spring Web model-vi
 % Filter and Interceptor
 We continued with the filters. The filters are objects used to intercept the HTTP requests and responses of the application. Basically, they are the layer before sending the request to the controller and before sending a response to the client. Some common usages are logging requests and responses, logging request processing time, formatting request body or header, verifying authentication tokens, or compressing responses.
 
-Interceptors are pretty similar to filters, but they act in Spring Context, so they are powerful enough to manage HTTP Request and Response but can implement more sophisticated behavior because they can access all Spring contexts. In other words, we can not use filters outside the web context, while Spring interceptors can be used anywhere because they are defined in the application context.
+Interceptors are pretty similar to filters, but they act in \texttt{Spring Context}, so they are powerful enough to manage HTTP Request and Response but can implement more sophisticated behavior because they can access all \texttt{Spring} contexts. In other words, we can not use filters outside the web context, while \texttt{Spring} interceptors can be used anywhere because they are defined in the application context.
 
 \subsubsection{Exception}
 
 % Exception
-Then we dived into the exceptions. Firstly, we examined the default answer of spring for errors. An example from my final project is given below. 
+Then we dived into the exceptions. Firstly, we examined the default answer of \texttt{Spring} for errors. An example from my final project is given below. 
 \begin{minted}[breaklines]{json}
 {
   "timestamp": "2022-09-17T10:03:08.250+00:00",
@@ -42,7 +42,7 @@ Then we dived into the exceptions. Firstly, we examined the default answer of sp
 }
 \end{minted}
 
-It can be said that this type of answer constitutes a security vulnerability because of the information the error provides an error message and codes. For example, someone can tell that this system uses the Spring framework. After examining the default answer of Spring, we realized errors are also needed to be handled due to security as well as providing a meaningful message. We discussed how we could handle errors and change the behaviors and messages when an error occurs.
+It can be said that this type of answer constitutes a security vulnerability because of the information the error provides an error message and codes. For example, someone can tell that this system uses the \texttt{Spring} framework. After examining the default answer of \texttt{Spring}, we realized errors are also needed to be handled due to security as well as providing a meaningful message. We discussed how we could handle errors and change the behaviors and messages when an error occurs.
 
 \subsubsection{Model, Entity, and Database}
 
@@ -50,7 +50,7 @@ It can be said that this type of answer constitutes a security vulnerability bec
 After the error handling, we learned the Data Transfer Objects (DTOs), which are used to encapsulate data and carry this data between processes and their usages. I extensively used models in the final project to transfer data between processes and layers.
 
 % Entity and Database
-Since we will have been using the database, we had to make the database connection. Spring provides database connection capability with hibernate, which is integrated inside Spring and makes the database connection and necessary database operation. 
+Since we will have been using the database, we had to make the database connection. \texttt{Spring} provides database connection capability with hibernate, which is integrated inside \texttt{Spring} and makes the database connection and necessary database operation. 
 
 Hibernate can also create the tables in the database by using entities provided by entity classes. Therefore, we used entity classes to tell the hibernate to create the table in the database.
 
@@ -59,7 +59,7 @@ Hibernate can also create the tables in the database by using entities provided 
 % Services and Repositories
 Services are generally used for business logic, such as creating, storing, or changing data. I extensively used the services in my final project. After the controller met the request, the proper function was called, and the necessary business was done in the project.
 
-Repositories are the mechanism for encapsulating storage, retrieval, and search behavior that emulates a collection of objects. They are used for the access layer for accessing and making necessary operations in the database. We chose to use Spring Data JPA for this purpose. After making the required settings from the application.yaml, Spring automatically connects itself to the database and gets ready to execute queries with little effort. In repositories, there is almost no need to write SQL queries executed in the database, even if it is allowed. By using the specific combination of some keys in the function names inside the repository interface, we provide necessary information to Spring so that Spring can create the proper queries and execute them by connecting to the database.
+Repositories are the mechanism for encapsulating storage, retrieval, and search behavior that emulates a collection of objects. They are used for the access layer for accessing and making necessary operations in the database. We chose to use \texttt{Spring Data JPA} for this purpose. After making the required settings from the application.yaml, \texttt{Spring} automatically connects itself to the database and gets ready to execute queries with little effort. In repositories, there is almost no need to write SQL queries executed in the database, even if it is allowed. By using the specific combination of some keys in the function names inside the repository interface, we provide necessary information to \texttt{Spring} so that \texttt{Spring} can create the proper queries and execute them by connecting to the database.
 
 % Various Configuration
 After the basics, we dived into the configuration of our apps, such as security, password encryption, or data loading when it is started.
