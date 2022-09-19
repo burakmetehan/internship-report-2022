@@ -1,33 +1,33 @@
 \section{Introduction to Web Development}
 
-The first week of my internship was about the Java Core, whereas we focused on the enterprise version of Java, Java EE or Jakarta EE, and web development in the second week.
+The first week of my internship was about the \texttt{Java} Core, whereas we focused on the enterprise version of \texttt{Java}, \texttt{Java EE}, or \texttt{Jakarta EE}, and web development in the second week.
 
-\subsection{Introduction to Java EE Platform}
+\subsection{Introduction to \texttt{Java EE} Platform}
 
-After learning the Java versions and their primary concern, we discussed enterprise-level applications and their needs. Then, we focused on how Java values developers, vendors, and businesses. In this part, I again realized why Java is still so popular. Developers and companies can focus on development instead of losing time thinking about what they will use and learning completely different technologies.
+After learning the \texttt{Java} versions and their primary concern, we discussed enterprise-level applications and their needs. Then, we focused on how \texttt{Java} values developers, vendors, and businesses. In this part, I again realized why \texttt{Java} is still so popular. Developers and companies can focus on development instead of losing time thinking about what they will use and learning completely different technologies.
 
-Our mentor mentioned that the specifications are determined and defined concurringly, and vendors only compete at their implementation level in the Java world so that developers can use any J2EE implementation for development and deployment. Additionally, I learned about layers that are the foundation of software architecture (presentation, application/business, data, and service layers) and types of software architectures (one-tier, two-tier, three-tier, and N-tier architectures) and their advantages and disadvantages.
+Our mentor mentioned that the specifications are determined and defined concurringly, and vendors only compete at their implementation level in the \texttt{Java} world so that developers can use any \texttt{J2EE} implementation for development and deployment. Additionally, I learned about layers that are the foundation of software architecture (presentation, application/business, data, and service layers) and types of software architectures (one-tier, two-tier, three-tier, and N-tier architectures) and their advantages and disadvantages.
 
-\subsection{Introduction to Web Development on Java Platform}
+\subsection{Introduction to Web Development on \texttt{Java} Platform}
 
-After learning what websites and web applications are and their differences, we discussed web servers and installing one of the preferred web servers on Java World: ``Tomcat''. After discussing what Tomcat is and the installation process, we focused on the basics of the web world: HTTP and WWW, Request and Response, URL, Domain Names, DNS, and Static and Dynamic Content.
+After learning what websites and web applications are and their differences, we discussed web servers and installing one of the preferred web servers on \texttt{Java} World: `\texttt{Tomcat}'. After discussing what Tomcat is and the installation process, we focused on the basics of the web world: HTTP and WWW, Request and Response, URL, Domain Names, DNS, and Static and Dynamic Content.
 
-After these basics, we learned the ``Servlets'', the basic concept and tool for Web development on Java world and JSP, which enables mixing static HTML content with unique code that produces the dynamic content. Then, we talked about Model-1/Model-2, MVC, and Servlet Container.
+After these basics, we learned the `\texttt{Servlets}', the basic concept and tool for Web development on \texttt{Java} world and \texttt{JSP}, which enables mixing static HTML content with unique code that produces the dynamic content. Then, we talked about Model-1/Model-2, MVC, and Servlet Container.
 
-\subsection{Developing Java Web Applications}
+\subsection{Developing \texttt{Java} Web Applications}
 
-We learned the basic anatomy of a web application and web module structure. I believe these topics are pretty beneficial because knowing the web module's structure is essential in the development and deployment process for portability. Also, if the structure of a web module is not suitable for the general convention, it is hard to maintain the module.
+We learned the basic anatomy of a web application and web module structure. I believe these topics are pretty beneficial because knowing the web module's structure is essential in portability's development and deployment process. Also, if the structure of a web module is not suitable for the general convention, it is hard to maintain the module.
 
-After that, we dived into HTTP, a pretty important protocol in the world of the web since many things are shaped based on it. Mainly, I was surprised when I learned the greatness of the contents carried by a request and response. Requests and responses include a lot of headers and their fields. After HTTP, we focused on Servlets and learned what they do, their life cycle, and their methods. I can tell that Servlets are a massive part of Java web development in their first days. 
+After that, we dived into HTTP, a pretty important protocol in the world of the web since many things are shaped based on it. Mainly, I was surprised when I learned the greatness of the contents carried by a request and response. Requests and responses include a lot of headers and their fields. After HTTP, we focused on Servlets and learned what they do, their life cycle, and their methods. I can tell that Servlets are a massive part of \texttt{Java} web development in their first days. 
 
-Then we discussed the ``\textit{Threading Issues}'' caused by the multi-threaded approach. I learned that the Multi-threaded Approach is an approach to solving the problem of how one servlet object serves many clients. In this approach, instead of creating multiple things, the servlet container creates a separate thread for each invocation of \texttt{service()} method, and that thread runs all servlet methods. It can be said that the multi-threaded approach makes servlets much faster. Also, we discussed the possible problem and solutions of this approach.
+Then we discussed the `\textit{Threading Issues}' caused by the multi-threaded approach. I learned that the Multi-threaded Approach is an approach to solving the problem of how one servlet object serves many clients. In this approach, instead of creating multiple things, the servlet container creates a separate thread for each invocation of \texttt{service()} method, and that thread runs all servlet methods. It can be said that the multi-threaded approach makes servlets much faster. Also, we discussed the possible problem and solutions of this approach.
 
-We also discussed information-sharing techniques among servlets (ServletContext object, HttpSession object, Request attributes). Before learning these techniques, I used incredible nonsensical techniques such as different web pages to carry information. However, these techniques are beneficial and make it easier to carry information between servlets.
+We also discussed information-sharing techniques among servlets (ServletContext object, HttpSession object, Request attributes). Before learning these techniques, I used incredible nonsensical methods such as different web pages to carry information. However, these techniques are beneficial and make it easier to carry information between servlets.
 
-\subsection{More on Java Web Applications}
+\subsection{More on \texttt{Java} Web Applications}
 
 We learned what a developer should do for an exception and error management by configuring a web descriptor, namely \texttt{web.xml}. This week, we generally used XML files for configurations; however, following weeks, we used annotation-based configurations. Then we discussed the HTML forms, the basic data sender structure in HTML, how they are used in web development, and why they are important. I learned that forms are simple and reliable user interface control tools and that the data collected by forms are sent to the server. We also talked about \texttt{GET} and \texttt{POST} methods.
 
-We focused on session management and filters on the last days of the week. We learned session tracking techniques in detail, which of them are tracking via IP address, user authentication, hidden form fields, URL rewriting, and cookies. In the filters part, we learned how filters actually work with other parts of the server. Then, we practiced how requests are used for authentication and security purposes.
+We focused on session management and filters on the week's last days. We learned session tracking techniques in detail, which of them are tracking via IP address, user authentication, hidden form fields, URL rewriting, and cookies. In the filters part, we learned how filters actually work with other parts of the server. Then, we practiced how requests are used for authentication and security purposes.
 
 Until this week, my knowledge about web development was pretty limited, and I was a novice to the web at this point. Therefore, these topics were confusing but enthusiastic for me, and I barely imagine the next level of web development discussed next week.
