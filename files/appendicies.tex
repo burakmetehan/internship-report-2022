@@ -1,0 +1,266 @@
+\section{Appendicies}
+
+\begin{figure}[ht]
+  \label{book-portal}
+  \centering
+  \includegraphics[width=.8\textwidth]{img/book-portal.png}
+  \caption{Requirements of Book Portal}
+\end{figure}
+
+
+% Back-end Directory Tree
+\begin{figure}[H]
+  \label{back-end-tree}
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [Book Portal Back-end
+      [src.main
+        [java.tr.com.obss.jip.bookportal
+          [{\hyperref[back-end-config-tree]{config}}
+            [\dots, file]
+          ]
+          [{\hyperref[back-end-controller-tree]{controller}}
+            [\dots, file]
+          ]
+          [{\hyperref[back-end-entity-tree]{entity}}
+            [\dots, file]
+          ]
+          [{\hyperref[back-end-exception-tree]{exception}}
+            [\dots, file]
+          ]
+          [{\hyperref[back-end-filter-tree]{filter}}
+            [\dots, file]
+          ]
+          [{\hyperref[back-end-model-tree]{model}}
+            [\dots, file]
+          ]
+          [{\hyperref[back-end-repo-tree]{repo}}
+            [\dots, file]
+          ]
+          [{\hyperref[back-end-service-tree]{service}}
+            [\dots, file]
+          ]
+          [{\hyperref[back-end-util-tree]{util}}
+            [\dots, file]
+          ]
+          [BookPortalApplication.java, file]
+        ]
+        [resources
+          [application.yml, file]
+        ]
+      ]
+      [pom.xml, file]
+    ]
+  \end{forest}
+  \caption{General Back-end Directory Tree of Book Portal}
+\end{figure}
+
+% Front-end Directory Tree
+\begin{figure}[H]
+  \label{front-end-tree}
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [Book Portal Front-end
+      [public
+        [public.html, file]
+      ]
+      [src
+        [globals
+          [GlobalVariables.js, file]
+        ]
+        [pages
+          [auth
+            [Login.js, file]
+          ]
+          [{\hyperref[front-end-book-tree]{book}}
+            [\dots]
+          ]
+          [{\hyperref[front-end-user-tree]{user}}
+            [\dots]
+          ]
+          [Home.js, file]
+        ]
+        [service]
+        [App.js, file]
+        [index.css, file]
+        [index.js, file]
+      ]
+      [package-lock.json, file]
+      [package.json, file]
+    ]
+  \end{forest}
+  \caption{Front-end Directory Tree of Book Portal}
+\end{figure}
+
+
+\begin{figure}[H]
+  \label{front-end-book-tree}
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [Book Portal Front-end
+      [src.pages.book
+        [add
+          [AddBook.js, file]
+          [BookForm.js, file]
+        ]
+        [delete
+          [BookCollapseDelete.js, file]
+          [DeleteBook.js, file]
+        ]
+        [list
+          [BookList.js, file]
+        ]
+        [update
+          [BookCollapseUpdate.js, file]
+          [UpdateBook.js, file]
+        ]
+        [util
+          [BookContentParser.js, file]
+          [BookDescription.js, file]
+          [BookSearch.js, file]
+        ]
+        [Book.js, file]
+      ]
+    ]
+  \end{forest}
+  \caption{Directory Tree of Front-end Book}
+\end{figure}
+
+\begin{figure}[H]
+  \label{front-end-user-tree}
+  \centering
+  \begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+      directory,
+    },
+    [Book Portal Front-end
+      [src.pages.user
+        [add
+          [AddUser.js, file]
+        ]
+        [delete
+          [DeleteUser.js, file]
+          [UserCollapseDelete.js, file]
+        ]
+        [update
+          [UpdateUser.js, file]
+          [UserCollapseUpdate.js, file]
+        ]
+        [util
+          [UserContentParser.js, file]
+          [UserDescription.js, file]
+          [UserSearch.js, file]
+        ]
+        [User.js, file]
+      ]
+    ]
+  \end{forest}
+  \caption{Directory Tree of Front-end User}
+\end{figure}
+
+
+% \begin{figure}[H]
+%   \label{front-end-tree}
+%   \centering
+%   \begin{forest}
+%     pic dir tree,
+%     where level=0{}{% folder icons by default; override using file for file icons
+%       directory,
+%     },
+%     [Book Portal
+%       [public
+%         [public.html, file]
+%       ]
+%       [src
+%         [globals
+%           [GlobalVariables.js, file]
+%         ]
+%         [pages
+%           [auth
+%             [Login.js, file]
+%           ]
+%           [book
+%             [add
+%               [AddBook.js, file]
+%               [BookForm.js, file]
+%             ]
+%             [delete
+%               [BookCollapseDelete.js, file]
+%               [DeleteBook.js, file]
+%             ]
+%             [list
+%               [BookList.js, file]
+%             ]
+%             [update
+%               [BookCollapseUpdate.js, file]
+%               [UpdateBook.js, file]
+%             ]
+%             [util
+%               [BookContentParser.js, file]
+%               [BookDescription.js, file]
+%               [BookSearch.js, file]
+%             ]
+%             [Book.js, file]
+%           ]
+%           [user
+%             [add
+%               [AddUser.js, file]
+%             ]
+%             [delete
+%               [DeleteUser.js, file]
+%               [UserCollapseDelete.js, file]
+%             ]
+%             [update
+%               [UpdateUser.js, file]
+%               [UserCollapseUpdate.js, file]
+%             ]
+%             [util
+%               [UserContentParser.js, file]
+%               [UserDescription.js, file]
+%               [UserSearch.js, file]
+%             ]
+%             [User.js, file]
+%           ]
+%           [Home.js, file]
+%         ]
+%         [service
+%           [AuthService.js, file]
+%           [BookListService.js, file]
+%           [BookService.js, file]
+%           [UserService.js, file]
+%         ]
+%         [App.js, file]
+%         [index.css, file]
+%         [index.js, file]
+%       ]
+%       [package-lock.json, file]
+%       [package.json, file]
+%     ]
+%   \end{forest}
+%   \caption{Front-end Directory Tree of Book Portal}
+% \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+

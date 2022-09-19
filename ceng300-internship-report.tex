@@ -21,6 +21,7 @@
 \usepackage{setspace}
 \usepackage{url}
 \usepackage{wrapfig}
+\usepackage{titlesec}
 
 \geometry{
   a4paper
@@ -35,6 +36,14 @@
   } \\
   \vspace{8pt}
 }
+
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 %%%%% Directory Tree Settings %%%%%
 \definecolor{folderbg}{RGB}{124,166,198}
@@ -113,5 +122,8 @@
 
 % Conclusion
 \input{files/conclusion.tex}
+
+% Appendicies
+\input{files/appendicies.tex}
 
 \end{document}
