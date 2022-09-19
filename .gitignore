@@ -9,6 +9,7 @@
 *.out
 *.synctex*
 *.toc
+*.pyg
 
 # Minted Folder
 _minted*
