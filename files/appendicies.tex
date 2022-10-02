@@ -1,12 +1,12 @@
 \section{Appendicies}
 
-\begin{figure}[ht]
+% Requirements of Book Porta
+\begin{figure}[H]
   \label{book-portal}
   \centering
-  \includegraphics[width=.8\textwidth]{img/book-portal.png}
+  \includegraphics[width=\textwidth]{img/book-portal.png}
   \caption{Requirements of Book Portal}
 \end{figure}
-
 
 % Back-end Directory Tree
 \begin{figure}[H]
@@ -100,7 +100,7 @@
   \caption{Front-end Directory Tree of Book Portal}
 \end{figure}
 
-
+% Front-end Book Directory Tree
 \begin{figure}[H]
   \label{front-end-book-tree}
   \centering
@@ -138,6 +138,7 @@
   \caption{Directory Tree of Front-end Book}
 \end{figure}
 
+% Front-end User Directory Tree
 \begin{figure}[H]
   \label{front-end-user-tree}
   \centering
@@ -170,97 +171,3 @@
   \end{forest}
   \caption{Directory Tree of Front-end User}
 \end{figure}
-
-
-% \begin{figure}[H]
-%   \label{front-end-tree}
-%   \centering
-%   \begin{forest}
-%     pic dir tree,
-%     where level=0{}{% folder icons by default; override using file for file icons
-%       directory,
-%     },
-%     [Book Portal
-%       [public
-%         [public.html, file]
-%       ]
-%       [src
-%         [globals
-%           [GlobalVariables.js, file]
-%         ]
-%         [pages
-%           [auth
-%             [Login.js, file]
-%           ]
-%           [book
-%             [add
-%               [AddBook.js, file]
-%               [BookForm.js, file]
-%             ]
-%             [delete
-%               [BookCollapseDelete.js, file]
-%               [DeleteBook.js, file]
-%             ]
-%             [list
-%               [BookList.js, file]
-%             ]
-%             [update
-%               [BookCollapseUpdate.js, file]
-%               [UpdateBook.js, file]
-%             ]
-%             [util
-%               [BookContentParser.js, file]
-%               [BookDescription.js, file]
-%               [BookSearch.js, file]
-%             ]
-%             [Book.js, file]
-%           ]
-%           [user
-%             [add
-%               [AddUser.js, file]
-%             ]
-%             [delete
-%               [DeleteUser.js, file]
-%               [UserCollapseDelete.js, file]
-%             ]
-%             [update
-%               [UpdateUser.js, file]
-%               [UserCollapseUpdate.js, file]
-%             ]
-%             [util
-%               [UserContentParser.js, file]
-%               [UserDescription.js, file]
-%               [UserSearch.js, file]
-%             ]
-%             [User.js, file]
-%           ]
-%           [Home.js, file]
-%         ]
-%         [service
-%           [AuthService.js, file]
-%           [BookListService.js, file]
-%           [BookService.js, file]
-%           [UserService.js, file]
-%         ]
-%         [App.js, file]
-%         [index.css, file]
-%         [index.js, file]
-%       ]
-%       [package-lock.json, file]
-%       [package.json, file]
-%     ]
-%   \end{forest}
-%   \caption{Front-end Directory Tree of Book Portal}
-% \end{figure}
-
-
-
-
-
-
-
-
-
-
-
-

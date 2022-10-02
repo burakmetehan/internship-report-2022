@@ -2,60 +2,34 @@
 
 \subsection{Environment Setup and First Program}
 
-Since we have been using \texttt{\texttt{Java}} during our internship, necessary development environments should be introduced and installed. After the setup of \texttt{\texttt{Java} SDK} was shown, we discussed the coding environment. Our mentor suggested \texttt{IntelliJ IDEA} and led its installation.
+Since we have been using \texttt{\texttt{Java}} during our internship, our mentor introduced necessary development environments and we installed the \texttt{JAVA SDK} and \texttt{IntelliJ IDEA}.
 
-After we discussed what software is and how it works on a computer and programming languages, we talked about \texttt{\texttt{Java}}'s history and working structure. Then, we continued by creating the first project on \texttt{IntelliJ IDEA}, and we coded the first program, the classic \textit{Hello World!}.
+After we discussed what software is and how it works on a computer and programming languages, we talked about \texttt{Java}'s history and working structure. Then, we continued by creating the first project on \texttt{IntelliJ IDEA}, and we started learning the core \texttt{Java}.
 
 
 \subsection{Introduction to \texttt{Java}}
 
-We started with the basics learned/taught while ordinarily learning a new programming language. The first week's four days were about \texttt{\texttt{Java}}'s basics and core concepts. Since syntax and basic concepts of \texttt{\texttt{Java}} are pretty similar to \texttt{C} and \texttt{C++}, understanding the topics was not that hard for me at the beginning of the week. Even though I was learning some tricks about \texttt{\texttt{Java}} and coding, generally, it was like I was learning the syntax of \texttt{\texttt{Java}}.
+We started with the basics by the standard learning curve of a programming language. The first week's four days were about \texttt{Java}'s basics and core concepts. Since syntax and basic concepts of \texttt{\texttt{Java}} are pretty similar to \texttt{C} and \texttt{C++}, understanding the topics was not that hard for me at the beginning of the week.
 
-While learning the concepts and basics, we usually practiced them. The usual process was that after we first coded the exercise, we examined the sample solutions other team members coded. If there was an error in someone's code or someone could not understand a part of the example, we learned by looking at those codes together. This approach has been constructive for me at times because examining the codes of other people helps the learning phase.
+While learning the concepts and basics, we usually practiced them. The usual process was that after we first coded the exercise, we examined the sample solutions other team members coded. This approach has been constructive for me at times because reviewing other people's codes helps the learning phase.
 
 \subsubsection{Basics of \texttt{Java}}
 
-We talked about comments, identifiers, escape sequences, data types, operators, basic input and output, conditions, and loops. While learning these, data types were, most probably, the most complicated part. Although I was familiar with the terms `\texttt{call-by-value}' or `\texttt{call-by-reference}', I believe that to gain a deep understanding of data types in \texttt{Java} language, the time needed to be devoted to them. Strings in \texttt{Java}, for example, can be considered as both primitive and reference data types.
+While learning the basics, the part that was remarkable to me was the Strings because there are some classes, such as \texttt{StringBuffer} and \texttt{StringBuilder}, to construct Strings. We also talked about advanced \texttt{Java IO} and the concept of `\texttt{serialization}', the conversion of the state of an object into a byte stream, which was new to me.
 
-Then, arrays whose preferred syntax in \texttt{Java} differs from \texttt{C++}, type casting, and variable length argument lists came up. Arrays and type casting work almost identically in both \texttt{Java} and \texttt{C++}. Even though other programming languages include that, it was the first time I heard of the `\textit{variable length argument lists}', which are used for an unspecified number of arguments.
+After these basics, some advanced features such as enumerations, interfaces, abstract, generic classes, and wildcards, which are new to me, are discussed.
 
-Strings have particular positions in some languages, and I believe \texttt{Java} is one of them. Strings can be confused because they can behave like both primitive and reference types. Also, I learned about \texttt{StringBuffer} and \texttt{StringBuilder}, which are basic classes to construct strings and add some functionality to them. Even though I knew what exceptions were, I did not practice much. In fact, I can say that I learned how it works and its actual use in this internship.
+\subsubsection{Collections and OOP}
 
-We also talked about advanced \texttt{Java IO} and the concept of `\texttt{serialization}',  the conversion of the state of an object into a byte stream. I believe that although it is a little bit harder than other languages I use, such as \texttt{Python}, file handling is a little bit more flexible in \texttt{Java}, thanks to variety. There are several classes to make file reading and writing easier.
+I knew some data structures from the courses I have taken. Many of these data structures are implemented in Java and called collections. We discussed the collection framework hierarchy of \texttt{Java} and learned these collections. Also, we examined the working ways of \texttt{hashCode()} and \texttt{equals()}, important methods for these collections to work properly.
 
-After these basics, some advanced features such as enumerations, interfaces, abstract, and generic classes are discussed. Although these were not new to me, I barely knew what they were and why we use them, but thanks to the exercises, I understood these. Interfaces were a little bit tricky for me because it was the first time I had encountered such a thing. Then, an unfamiliar topic arose: wildcards about which I did not know anything but practical.
-
-\subsubsection{Collections in \texttt{Java}}
-
-From the courses I have taken, I know some data structures. In this part, I learned that \texttt{Java} provides a variety of collections whose implementations are different under the hood. The collections that are in the figure below are discussed.  
-
-% Taken from https://facingissuesonit.com/2019/10/15/java-collection-framework-hierarchy/
-\begin{figure}[h!]
-  \centering
-  \copyrightbox[b]{
-    \includegraphics[width=\linewidth]{img/java-collection.jpg}
-  }{
-    Source: \url{https://facingissuesonit.com/2019/10/15/java-collection-framework-hierarchy/}
-  }
-\end{figure}
-
-Also, \texttt{hashCode()} and \texttt{equals()}, important methods for these collections to work properly, were discussed. It was shown what they are and why we use them.
-
-\subsubsection{OOP}
-
-This part covered the basics and principles of Object Oriented Programming (OOP).
-
-We started by discussing the basics, such as scopes, constructors, access modifiers, setter and getter methods, method overloading, and static methods. Since I was familiar with concepts from CENG 242: Programming Language Concepts, I did not have a hard time with these concepts.
-
-After the basics, we moved into the principles. We started with inheritance and class hierarchy. Here, I learned what superclasses and subclasses are, and that \texttt{Java} does not support multiple inheritances. Furthermore, behaviors of some concepts, such as access modifiers and constructors, in inheritance are discussed. Also, other principles of abstraction, encapsulation, and polymorphism are covered, but I did not learn new information.
+Afterward, we covered the basics, such as scopes, constructors, access modifiers, setter and getter methods, method overloading, and principles, such as inheritance, abstraction, encapsulation, and polymorphism, of Object Oriented Programming (OOP). Since I was familiar with concepts from CENG 242: Programming Language Concepts, I did not have a hard time with these concepts.
 
 \subsubsection{JavaBeans and JDBC}
 
-The last day of the week, when we got out of the basics of \texttt{Java} and learned databases and database connections by using \texttt{Java}, was a day that I learned new information and was challenged for the first time this week.
+The last day of the week, when we got out of the basics of \texttt{Java} and learned databases and database connections by using \texttt{Java}, was a day that I learned new information and was challenged for the first time.
 
-We started by talking about the \texttt{JavaBeans}, which is a standard. By learning and reading about \texttt{JavaBeans}, I realized that many things are standardized in \texttt{Java}, and implementations are competed instead of the standards. This makes the reason why \texttt{Java} is exceptionally preferred in corporate areas clear.
-
-Since we would have needed to add some dependencies and Maven would be used in our projects, we talked about Maven, a build automation tool, and installed it in addition to MySQL, which was going to be used as a database. After the installations and the environment adjustments, we dived into the \texttt{Java} Database Connectivity (JDBC), \texttt{Java} API that mainly manages to connect to a database. Connecting to a database, executing queries, using of ``\texttt{Statement}'', ``\texttt{ResultSet}'' and ``\texttt{PreparedStatement}'' which are basically used to sending SQL statements to databases, and transaction management.
+We started by talking about the \texttt{JavaBeans}. By learning and reading about \texttt{JavaBeans}, I realized that many things are standardized in \texttt{Java}, and implementations are competed instead of the standards. Additionally, we talked about Maven, a build automation tool, and installed it in addition to MySQL, which was going to be used as a database. After the installations, we dived into the \texttt{Java} Database Connectivity (JDBC),  \texttt{Java} API that mainly manages to connect to a database, and sending SQL statements to databases.
 
 
 \subsection{Git \& Bitbucket}

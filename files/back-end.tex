@@ -1,8 +1,6 @@
 \subsection{Back-end}
 
-As mentioned in the requirements, I used \texttt{Spring} for the back-end. The main folder structure can be seen \hyperref[back-end-tree]{at the appendicies}. \texttt{Spring Security} is active, and \texttt{JWT} tokens, which need to be inside the request's header, are used for authentication. After security is passed, the request is handled by controllers.
-
-In the back-end part, there are nine main folders:
+As mentioned in the requirements, I used \texttt{Spring} for the back-end. The main folder structure can be seen \hyperref[back-end-tree]{at the appendicies}. \texttt{Spring Security} is active, and \texttt{JWT} tokens, which need to be inside the request's header, are used for authentication. After security is passed, the request is handled by controllers. In the back-end part, there are nine main folders:
 \begin{itemize}
   \item \texttt{config}: contains the configurations and data loader.
   \item \texttt{controller}: contains request (Rest) controllers. If the requests are authorized, they are met by the related controller. When a request is met, necessary business logic is run.
@@ -14,7 +12,8 @@ In the back-end part, there are nine main folders:
   \item \texttt{service}: contains services. These classes consist of the business layer functions.
   \item \texttt{util}: contains utilities.
 \end{itemize}
-These are the main folders consisting of several files; I will explain them in detail.
+These are the main folders consisting of several files; I will explain them in detail. These back-end files are accesible in my GitHub repository of this report.
+\newpage
 
 
 \subsubsection{\texttt{config}}
@@ -26,7 +25,7 @@ The classes inside this folder are used for the configuration of \texttt{Spring}
   \centering
   \begin{forest}
     pic dir tree,
-    where level=0{}{% folder icons by default; override using file for file icons
+    where level=0{}{
       directory,
     },
     [config
@@ -63,7 +62,7 @@ Since controllers are not tricky, I could easily code and map the requests. The 
   \centering
   \begin{forest}
     pic dir tree,
-    where level=0{}{% folder icons by default; override using file for file icons
+    where level=0{}{
       directory,
     },
     [controller
@@ -82,31 +81,29 @@ This class is responsible for authentication operations. It can be used to check
 
 \paragraph{\texttt{BookController.java:}} This class handles the requests coming to the path `\texttt{/books}'. It has six \texttt{GET}, one \texttt{POST}, one \texttt{PUT}, and one \texttt{DELETE} mapping. 
 
-This class handles book operations such as searching, adding, updating, or deleting. I need a particular concern in this class: Pageable and List data. Since I needed pageable and list data in the front-end while searching the book, I coded two variances of each search function. This class can handle both id and name searches. In name searches, there is no need to provide the full name of the book. Instead, providing a letter or word inside the book name is enough.
+This class handles book operations such as searching, adding, updating, or deleting. I need a particular concern in this class: \texttt{Pageable} and \texttt{List} data. Since I needed pageable and list data in the front-end while searching the book, I coded two variances of each search function. This class can handle both id and name searches. In name searches, there is no need to provide the full name of the book. Instead, providing a letter or word inside the book name is enough.
 
-\paragraph{\texttt{BookListController.java:}} This class handles the requests coming to the path `\texttt{/}' and has two \texttt{PUT}. Although the main path is \texttt{/}, the two functions inside this class have special path mapping for its \texttt{PUT} mapping. This class is responsible for the favorite and read list operations. 
+\paragraph{\texttt{BookListController.java:}} This class handles the requests coming to the path `\texttt{/}' and has two \texttt{PUT}. Although the main path is `\texttt{/}', the two functions inside this class have special path mapping for its \texttt{PUT} mapping. This class is responsible for the favorite and read list operations. 
 
-According to the traditional way, updating something is done with \texttt{PUT} request. Since adding or removing a book from read or favorite lists is updating the list, I decided to use \texttt{PUT} requests. However, there were four operations: adding or removing from the read list and adding or removing from the favorite list. Firstly, I divided all operations into four functions and realized it was not a good idea because path mapping was not nice. 
-
-So, a problem came up about how to handle these operations. I decided to have two main functions and paths for read and favorite lists. In main paths \texttt{/read} and \texttt{/fav}, I handled read and favorite list operations, respectively. A request parameter is needed as well as the book and user ids to acquire the necessary information, which book will be added or removed.
+According to the traditional way, updating something is done with \texttt{PUT} request. Since adding or removing a book from read or favorite lists is updating the list, I decided to use \texttt{PUT} requests. However, there were four operations: adding or removing from the read list and adding or removing from the favorite list. Therefore, I decided to have two main functions and paths for read and favorite lists. In main paths `\texttt{/read}' and `\texttt{/fav}', I handled read and favorite list operations, respectively. A request parameter is needed as well as the book and user ids to acquire the necessary information, which book will be added or removed.
 
 \paragraph{\texttt{UserController.java:}} This class handles the requests coming to the path `\texttt{/users}'. It has six \texttt{GET}, one \texttt{POST}, one \texttt{PUT}, and one \texttt{DELETE} mapping.
 
-This class is similar to the book controller and is responsible for user operations such as searching, adding, updating, or deleting. Like in the book controller, I also need a particular concern, Pageable and List data, and I solve this problem the same way in the book controller.
+This class is similar to the book controller and is responsible for user operations such as searching, adding, updating, or deleting. Like in the book controller, I also need a particular concern, \texttt{Pageable} and \texttt{List} data, and I solve this problem the same way in the book controller.
 
 
 \subsubsection{\texttt{entity}}
 
-Entities were my main data classes. Thanks to Hibernate, I was also able to create the database tables by using \texttt{@Table} annotations, so the tables were created automatically. Around the back-end, such as between data and business layers, I used these entity classes; however, I used models while sharing and transmitting information between the client and server.
+Entities are my main data classes. Thanks to \texttt{Hibernate}, I was also able to create the database tables by using \texttt{@Table} annotations, so the tables were created automatically. Around the back-end, such as between data and business layers, I used these entity classes; however, I used models while sharing and transmitting information between the client and server.
 
-The main problem with entity classes was the mutual data types. A \texttt{User} includes \texttt{Set<Book>} inside it, and A \texttt{Book} includes \texttt{Set<User>} inside it. This was a problem when this information was sent to the client side due to this mutuality. For example, when a \texttt{User} is sent to the client, its read list is also sent. However, inside the read list, there are books that contain the \texttt{User} that is being sent to the client. Therefore, there was an infinite loop while parsing the data. I solved it by using \texttt{@ManyToMany}, and \texttt{@JsonManagedReference} annotations.
+The main problem with entity classes was the mutual data types. A \texttt{User} includes \texttt{Set<Book>} inside it, and a \texttt{Book} includes \texttt{Set<User>} inside it. This was a problem when this information was sent to the client side due to this mutuality. For example, when a \texttt{User} is sent to the client, its read list is also sent. However, inside the read list, there are books that contain the \texttt{User} that is being sent to the client. Therefore, there was an infinite loop while parsing the data. I solved it by using \texttt{@ManyToMany}, and \texttt{@JsonManagedReference} annotations.
 
 \begin{figure}[ht]
   \label{back-end-entity-tree}
   \centering
   \begin{forest}
     pic dir tree,
-    where level=0{}{% folder icons by default; override using file for file icons
+    where level=0{}{
       directory,
     },
     [entity
@@ -160,16 +157,16 @@ The names of the files explain what the classes are for and what they do. These 
 
 \subsubsection{\texttt{filter}}
 
-My app contains only one filter, which is checking the \texttt{JWT} token. When a user or admin is logged in to the system, I send a new \texttt{JWT} token. The reason for that is transmitting username and password in all requests. Instead, I use a \texttt{JWT} token for authentication. All requests go through the filter for \texttt{JWT} token check. If the \texttt{JWT} token does not exist in the header or it is expired, \texttt{BadRequestException} is thrown, and a response is returned with \texttt{BAD\_REQUEST} status code.
+My app contains only one filter, which is checking the \texttt{JWT} token. I use \texttt{JWT} token for authentication purpose because transmitting username and password in all request is hard and can cause security vulnerabilities. If the \texttt{JWT} token does not exist in the header or it is expired, \texttt{BadRequestException} is thrown, and a response is returned with \texttt{BAD\_REQUEST} status code.
 
-This part challenged me because I did not know \texttt{JWT} and how to check it. For this filter and the \texttt{JWT} authorization, I spent almost one day. However, the main problem was not that the subject was difficult but that I misunderstood some concepts and topics and needed to change the security configuration quite a bit. By getting help from the internet and reading, I solved the problem in security configuration and filter.
+This part challenged me because I did not know \texttt{JWT} and how to check it, and I spent almost one day for this authentication system. However, the main problem was not that the subject was difficult but that I misunderstood some concepts and topics and needed to change the security configuration quite a bit.
 
 \begin{figure}[ht]
   \label{back-end-filter-tree}
   \centering
   \begin{forest}
     pic dir tree,
-    where level=0{}{% folder icons by default; override using file for file icons
+    where level=0{}{
       directory,
     },
     [filter
@@ -182,16 +179,16 @@ This part challenged me because I did not know \texttt{JWT} and how to check it.
 
 \subsubsection{\texttt{model}}
 
-Models are mainly used to transmit data between client and server sides. There were two reasons. The first one is that client does not know some information, such as the creation date. The second one is that the client should not and not need to see some information, such as the user's password or the object's update date. Therefore, I used DTOs for any information transfer between the client and server sides.
+Models are mainly used to transmit data between client and server sides. There were two reasons. The first one is that client does not know some information, such as the creation date while the latter is that the client should not need to see some information, such as the user's password or the object's update date. Therefore, I used DTOs for any information transfer between the client and server sides.
 
-In addition to DTOs, one class, called \texttt{MyUserDetails}, is not used for information transfer. It was needed for the authentication system. It helps by indicating how the necessary information is extracted from my \texttt{User} entity.
+One class, called \texttt{MyUserDetails}, is not used for information transfer. It was needed for the authentication system. It helps by indicating how the necessary information is extracted from the \texttt{User} entity.
 
 \begin{figure}[ht]
   \label{back-end-model-tree}
   \centering
   \begin{forest}
     pic dir tree,
-    where level=0{}{% folder icons by default; override using file for file icons
+    where level=0{}{
       directory,
     },
     [model
@@ -222,7 +219,7 @@ Repositories are used to access the databases, and they make use of the \texttt{
   \centering
   \begin{forest}
     pic dir tree,
-    where level=0{}{% folder icons by default; override using file for file icons
+    where level=0{}{
       directory,
     },
     [repo
@@ -241,14 +238,14 @@ There is one for each main entity. \texttt{BookRepository} is used for operation
 
 Services are the business layer of my app. All the operations, such as adding or removing the books or users, and logic are done in this layer. Controllers use the services for related operations; therefore, it can be said that there is one service for each controller.
 
-Inside services, other services or necessary repositories are used. Accessing the database is done inside services with the help of repositories. Repositories contain several different implementations of the same operation for different needs. For example, several search functions exist for pageable and list data.
+Inside services, other services or necessary repositories are used. Accessing the database is done inside services with the help of repositories that contain several different implementations of the same operation for different needs. For example, several search functions exist for pageable and list data.
 
 \begin{figure}[ht]
   \label{back-end-service-tree}
   \centering
   \begin{forest}
     pic dir tree,
-    where level=0{}{% folder icons by default; override using file for file icons
+    where level=0{}{
       directory,
     },
     [service
@@ -260,6 +257,7 @@ Inside services, other services or necessary repositories are used. Accessing th
   \end{forest}
   \caption{Structure of service folder.}
 \end{figure}
+\newpage
 
 
 \subsubsection{\texttt{util}}
@@ -271,12 +269,12 @@ This folder contains only one class, called \texttt{JwtTokenUtil}. This class co
   \centering
   \begin{forest}
     pic dir tree,
-    where level=0{}{% folder icons by default; override using file for file icons
+    where level=0{}{
       directory,
     },
     [util
       [JwtTokenUtil.java, file]
     ]
   \end{forest}
-  \caption{Structure of controller folder.}
+  \caption{Structure of util folder.}
 \end{figure}
