@@ -1,0 +1,30 @@
+server:
+  port: 8080
+spring:
+  main:
+    banner-mode: off
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    username: root
+    password: 6383
+    url: jdbc:mysql://localhost:3306/spring_final_project
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+jwt:
+  secret: springfinalproject
+  token:
+    prefix: Bearer
+    prefix_length: 7
+    validity: 172800 # in seconds - 172800: 2 days
+data-loader:
+  admin:
+    username: admin
+    password: admin
